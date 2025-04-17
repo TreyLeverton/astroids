@@ -8,17 +8,14 @@ from asteroidfield import *
 
 def main():
     pygame.init()
-    print("Starting Asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
-    print("Setting up containers")
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
@@ -26,12 +23,6 @@ def main():
     player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
     pygame.display
-
-    print("Asteroid field created")
-    
-    print(f"Asteroids count: {len(asteroids)}")
-    print(f"Updatable count: {len(updatable)}")
-    print(f"Drawable count: {len(drawable)}")
 
     clock = pygame.time.Clock()
     dt = 0
