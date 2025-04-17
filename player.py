@@ -2,13 +2,38 @@ from circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 import pygame
 
-class Player(CircleShape):
+class Player(pygame.sprite.Sprite, CircleShape):
     def __init__(self, x, y):
-        super().__init__(x, y, PLAYER_RADIUS)
-        self.rotation = 0 
+        pygame.sprite.Sprite.__init__(self)
+        CircleShape.__init__(self, x, y, PLAYER_RADIUS)
+        self.rotation = 0
+        
+        # Create an appropriately sized surface
+        size = int(self.radius * 2.5)  # Make it a bit larger to fit the triangle
+        self.image = pygame.Surface((size, size), pygame.SRCALPHA)
+        self.rect = self.image.get_rect(center=(self.position.x, self.position.y))
+        
+        # Initial drawing
+        self.redraw()
+
+    def redraw(self):
+        # Clear the surface
+        self.image.fill((0, 0, 0, 0))  # Transparent black
+        
+        # Get triangle points
+        tri_points = self.triangle()
+        
+        # Convert world coordinates to surface-relative coordinates
+        center = pygame.Vector2(self.rect.width // 2, self.rect.height // 2)
+        adjusted_points = [(p.x - self.position.x + center.x, 
+                           p.y - self.position.y + center.y) for p in tri_points]
+        
+        # Draw the triangle
+        pygame.draw.polygon(self.image, (255, 255, 255), adjusted_points, 2)
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
+        self.redraw()  # Redraw after rotation changes
 
     # in the player class
     def triangle(self):
