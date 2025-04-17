@@ -19,11 +19,21 @@ def main():
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
 
+    print("Setting up containers")
     Player.container = (updatable, drawable)
     Asteroid.container = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
 
+    print(f"Player created at {player.position}")
+    
+    print("Creating asteroid field")
+
     asteroid_field = AsteroidField()
+    print("Asteroid field created")
+    
+    print(f"Asteroids count: {len(asteroids)}")
+    print(f"Updatable count: {len(updatable)}")
+    print(f"Drawable count: {len(drawable)}")
 
     clock = pygame.time.Clock()
     dt = 0
