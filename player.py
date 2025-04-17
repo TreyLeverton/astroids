@@ -4,10 +4,11 @@ from shot import *
 import pygame
 
 class Player(CircleShape):
+    shot_timer = 0
+    
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
-        shot_timer = 0
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
