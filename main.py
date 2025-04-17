@@ -17,6 +17,7 @@ def main():
 
     clock = pygame.time.Clock()
     dt = 0
+    asteroid_field = AsteroidField()
 
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -41,7 +42,6 @@ def main():
         drawable.draw(screen)
         dt = clock.tick(60) / 1000
         updatable.update(dt)
-        asteroid_field = AsteroidField()
 
         pygame.display.flip()
         
