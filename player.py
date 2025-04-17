@@ -26,6 +26,7 @@ class Player(CircleShape):
         self.position += forward * PLAYER_SPEED * dt
     
     def shoot(self, dt):
+        print("Shoot method is being called!")
         direction = pygame.Vector2(0,1)
         rotated_velocity = direction.rotate(self.rotation)
         velocity = rotated_velocity * PLAYER_SHOOT_SPEED
