@@ -19,9 +19,9 @@ def main():
     asteroids = pygame.sprite.Group()
 
     print("Setting up containers")
-    player.container = (updatable, drawable)
+    Player.container = (updatable, drawable)
     Asteroid.container = (asteroids, updatable, drawable)
-    asteroid_field.containers = (updatable)
+    AsteroidField.containers = (updatable)
 
     print(f"Player created at {player.position}")
     
