@@ -1,7 +1,10 @@
+import sys
 import pygame
 from constants import *
 from circleshape import *
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import *
 
 def main():
     pygame.init
@@ -15,18 +18,31 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+
+    Asteroid.containers = (asteroids, updatable, drawable)
+    Player.containers = (updatable, drawable)
+    AsteroidField.containers = (updatable)
+
     while True:
+        for asteroid in asteroids:
+            if player.collides_with(asteroid):
+                print("Game over!")
+                sys.exit()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return 
+                return
+            
             
         screen.fill("black")
 
-        player.draw(screen)
+        drawable.draw(screen)
         dt = clock.tick(60) / 1000
-        player.update(dt)
+        updatable.update(dt)
+        asteroid_field = AsteroidField()
 
-        
         pygame.display.flip()
         
 if __name__ == "__main__":
