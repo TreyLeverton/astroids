@@ -2,6 +2,7 @@ import pygame
 from constants import *
 from circleshape import *
 from player import Player
+from asteroid import Asteroid
 
 def main():
     pygame.init
@@ -12,6 +13,12 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    asteroid = pygame.sprite.Group()
+
+    Player.container = (updatable, drawable)
+    Aster
     clock = pygame.time.Clock()
     dt = 0
 
@@ -22,9 +29,10 @@ def main():
             
         screen.fill("black")
 
-        player.draw(screen)
         dt = clock.tick(60) / 1000
-        player.update(dt)
+        updatable.update(dt)
+        for entity in drawable:
+            entity.draw(screen)
 
         
         pygame.display.flip()
