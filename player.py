@@ -7,6 +7,7 @@ class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0 
+        self.shots = pygame.sprite.Group()
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
@@ -30,7 +31,7 @@ class Player(CircleShape):
         velocity = rotated_velocity * PLAYER_SHOOT_SPEED
         new_shot = Shot(self.position.x, self.position.y, SHOT_RADIUS) #maybe bug
         new_shot.velocity = velocity
-        self.shoot.add(new_shot)
+        self.shots.add(new_shot)
          
     def update(self, dt):
         keys = pygame.key.get_pressed()
