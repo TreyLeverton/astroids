@@ -40,6 +40,8 @@ class Player(CircleShape):
     def update(self, dt):
         keys = pygame.key.get_pressed()
         self.shot_timer -= dt
+        if self.shot_timer < 0:
+            self.shot_timer = 0
 
         if keys[pygame.K_a]:
             self.rotate(-dt)
