@@ -16,3 +16,4 @@ class Asteroid(CircleShape):
         movement = self.velocity * dt
         self.x = movement.x
         self.y = movement.y
+        self.rect.center = (self.x, self.y)
