@@ -29,6 +29,9 @@ def main():
     asteroid_field = AsteroidField()
 
     while True:
+
+        print("Player in drawable:", player in drawable)
+        
         for asteroid in asteroids:
             if player.collides_with(asteroid):
                 print("Game over!")
