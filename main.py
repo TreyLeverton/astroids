@@ -13,8 +13,7 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
-
+    
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
@@ -28,7 +27,9 @@ def main():
     
     print("Creating asteroid field")
 
+    player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
+
     print("Asteroid field created")
     
     print(f"Asteroids count: {len(asteroids)}")
@@ -46,6 +47,7 @@ def main():
         screen.fill("black")
 
         updatable.update(dt)
+        drawable.draw(screen)
 
         for asteroid in asteroids:
             if player.collision(asteroid):
