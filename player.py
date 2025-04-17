@@ -8,6 +8,7 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.shot_timer = 0
+        self.shots = pygame.sprite.Group()
     
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
