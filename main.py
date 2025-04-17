@@ -21,7 +21,10 @@ def main():
 
     Player.container = (updatable, drawable)
     Asteroid.container = (asteroids, updatable, drawable)
-    AsteroidField.container = (updatable)
+    AsteroidField.container = (updatable,)
+
+    asteroid_field = AsteroidField()
+
     clock = pygame.time.Clock()
     dt = 0
 
@@ -32,15 +35,17 @@ def main():
             
         screen.fill("black")
 
-        dt = clock.tick(60) / 1000
         updatable.update(dt)
+
         for asteroid in asteroids:
             if player.collision(asteroid):
                 print("Game over!")
                 sys.exit()
+
         for entity in drawable:
             entity.draw(screen)
 
+        dt = clock.tick(60) / 1000
         
         pygame.display.flip()
         
