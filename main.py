@@ -25,6 +25,7 @@ def main():
 
     player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
+    pygame.display
 
     print("Asteroid field created")
     
