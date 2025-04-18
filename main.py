@@ -3,7 +3,7 @@ import pygame
 from constants import *
 from circleshape import *
 from player import *
-from asteroid import Asteroid
+from asteroid import *
 from asteroidfield import *
 
 
