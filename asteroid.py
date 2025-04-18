@@ -14,33 +14,33 @@ class Asteroid(CircleShape):
         self.position += (self.velocity * dt)
 
     def split(self):
+        # Store the original groups before killing
+        original_groups = self.groups()
+    
+        # Kill the asteroid
         self.kill()
+    
+        # Don't split if too small
         if self.radius <= ASTEROID_MIN_RADIUS:
             return
     
         # Generate random angle for splitting
         random_angle = random.uniform(20, 50)
     
-        # Create copies of the original velocity vector
-        new_velocity1 = pygame.math.Vector2(self.velocity)
-        new_velocity2 = pygame.math.Vector2(self.velocity)
-    
-        # Rotate the new velocity vectors
-        new_velocity1.rotate_ip(random_angle)
-        new_velocity2.rotate_ip(-random_angle)
-    
-        # Scale up the velocities
-        new_velocity1 *= 1.2
-        new_velocity2 *= 1.2
+        # Create new velocity vectors by rotating the original
+        # Note: rotate() returns a new vector and doesn't modify the original
+        new_velocity1 = self.velocity.rotate(random_angle) * 1.2
+        new_velocity2 = self.velocity.rotate(-random_angle) * 1.2
     
         # Calculate new radius
         new_radius = self.radius - ASTEROID_MIN_RADIUS
     
-        # Create new asteroids
-        new_asteroid1 = Asteroid(pygame.math.Vector2(self.position), new_velocity1, new_radius)
-        new_asteroid2 = Asteroid(pygame.math.Vector2(self.position), new_velocity2, new_radius)
+        # Create new asteroids with copied position vectors to avoid reference issues
+        new_position = pygame.Vector2(self.position)
+        new_asteroid1 = Asteroid(new_position, new_velocity1, new_radius)
+        new_asteroid2 = Asteroid(new_position, new_velocity2, new_radius)
     
-        # Make sure the new asteroids are added to the same groups as the original
-        for group in self.groups():
+        # Add the new asteroids to all groups the original was in
+        for group in original_groups:
             group.add(new_asteroid1)
             group.add(new_asteroid2)
