@@ -36,10 +36,12 @@ class Asteroid(CircleShape):
         new_radius = self.radius - ASTEROID_MIN_RADIUS
     
         # Create new asteroids with copied position vectors to avoid reference issues
-        new_position = pygame.Vector2(self.position)
-        new_asteroid1 = Asteroid(new_position, new_velocity1, new_radius)
-        new_asteroid2 = Asteroid(new_position, new_velocity2, new_radius)
+        new_asteroid1 = Asteroid(self.position.x, self.position.y, new_radius)
+        new_asteroid2 = Asteroid(self.position.x, self.position.y, new_radius)
     
+        # Set velocities after creation
+        new_asteroid1.velocity = new_velocity1
+        new_asteroid2.velocity = new_velocity2
         # Add the new asteroids to all groups the original was in
         for group in original_groups:
             group.add(new_asteroid1)
